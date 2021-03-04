@@ -87,3 +87,19 @@ func (wsc *WebSocketConnection) quitCurrentRoom(event *event) {
 		oldRoom.BroadcastMessage(event, event.subscriber.connection)
 	}
 }
+
+func (ws *WebSocketConnection) GetChatRooms() []RoomDTO {
+	var rooms []RoomDTO = []RoomDTO{}
+
+	for name, room := range ws.rooms {
+		var members []string
+		for _, member := range room.members {
+			members = append(members, member.nickname)
+		}
+
+		roomDTO := RoomDTO{Name: name, Members: members}
+		rooms = append(rooms, roomDTO)
+	}
+
+	return rooms
+}

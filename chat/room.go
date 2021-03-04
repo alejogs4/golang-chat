@@ -18,3 +18,8 @@ func (r *room) BroadcastMessage(message *event, sender *websocket.Conn) {
 		}
 	}
 }
+
+type RoomDTO struct {
+	Name    string   `json:"name"`
+	Members []string `json:"members"`
+}
